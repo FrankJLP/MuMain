@@ -134,6 +134,16 @@ jobs:
           --output-on-failure
           --no-tests=error
 
+      - name: List build output
+        run: dir out/build/fork-ci-windows/src/Release
+
+      - name: Upload Windows client
+        uses: actions/upload-artifact@v4
+        with:
+          name: MuMain-windows-x64
+          path: out/build/fork-ci-windows/src/Release
+          if-no-files-found: error   
+
   linux-editor:
     name: Linux x64 Release, editor ON
     if: github.event_name == 'workflow_dispatch' && inputs.editor
